@@ -1,4 +1,4 @@
-name: Helm Upgraude
+name: Helm Upgrade
 run-name: ${{ github.actor }} - ${{ github.ref_name }}
 
 on:
@@ -44,12 +44,12 @@ jobs:
 
     - name: Helm dry-run stage
       run: |
-        helm upgrade --install ${{ inputs.helm-release-name }} ./helm-charts/todoapp \
+        helm upgrade --install ${{ inputs.helm-release-name }} -f ${{ inputs.helm-values-path }} \
           --namespace default \
           --dry-run
 
     - name: Helm upgrade/install atomic
       run: |
-        helm upgrade --install ${{ inputs.helm-release-name }} ./helm-charts/todoapp \
+        helm upgrade --install ${{ inputs.helm-release-name }} -f ${{ inputs.helm-values-path }} \
           --namespace default \
           --atomic
